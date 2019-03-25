@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TenXamarinD7"
+             x:Class="TenXamarinD7.MainPage">
+
+    <StackLayout Padding="10">
+        <Entry x:Name="titleEntry"
+               Placeholder="Title of the experience" 
+               TextChanged="TitleEntry_TextChanged"
+               />
+        <Entry x:Name="searchEntry"
+               Style="{StaticResource mainEntryStyle}"
+               Placeholder="Search a nearby venue..."
+               TextChanged="SearchEntry_TextChanged"/>
+        <ListView x:Name="venuesListView"
+                  ItemSelected="Handle_ItemSelected"
+                  HeightRequest="20"
+                  Margin="-16,0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding name}"
+                              Detail="{Binding location.distance, StringFormat='{0} meters away'}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout x:Name="selectedVenueStackLayout"
+                     IsVisible="false">
+            <Label x:Name="venueNameLabel"
+                   Style="{StaticResource titleLabelStyle}"/>
+            <Label x:Name="venueCategoryLabel"
+                   Style="{StaticResource subtitleLabelStyle}"/>
+            <Label x:Name="venueCoordinatesLabel"
+                   Style="{StaticResource detailLabelStyle}"/>
+        </StackLayout>
+        
+        <Editor x:Name="contentEditor" TextChanged="ContentEditor_TextChanged" VerticalOptions="FillAndExpand"
+                Placeholder="Write your experience..."/>
+        <Button Text="Save" Clicked="SaveButton_Clicked" x:Name="saveButton" IsEnabled="False" Style="{StaticResource mainButtonStyle}"/>
+        <Button Text="Cancel" Clicked="CancelButton_Clicked" Style="{StaticResource cancelButtonStyle}"/>
+    </StackLayout>
+
+</ContentPage>
